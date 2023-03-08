@@ -30,17 +30,23 @@ public class ParametricEquationRenderer : MonoBehaviour
     [SerializeField]
     private int step;
 
+    private float x;
+    private float y;
+
     void Start()
     {
-        Vector3[] points = new Vector3[4];
-        points[0] = new Vector3(1, 1, 0);
-        points[1] = new Vector3(-1, 1, 0);
-        points[2] = new Vector3(-1, -1, 0);
-        points[3] = new Vector3(1, -1, 0);
-
+        Vector3[] points = new Vector3[step];
+        int j = 0;
+        for (int i = 0; i < step; i++)
+        {
+            x = Mathf.Cos(2.0f*Mathf.PI*((a*(j+1.0f)+b)));
+            y = Mathf.Sin(2.0f*Mathf.PI*((c*(j+1.0f)+d)));
+            points[j] = new Vector3(x, y, 0);
+            j++;
+        }
         //  Before setting a line renderer positions, the position
         //  count must be set first.
-        lineRenderer.positionCount = 4;
+        lineRenderer.positionCount = 21;
 
         //  This statement sets a line renderer positions.
         //  Old positions are overridden.
